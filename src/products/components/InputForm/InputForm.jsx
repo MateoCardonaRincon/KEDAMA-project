@@ -1,50 +1,39 @@
-import { Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import AutoId from "./AutoId.jsx"
 import Product from "./ProductInput.jsx";
 import Price from "./PriceInput.jsx";
 import State from "./StateInput.jsx";
-import Filter from "./Filter.jsx";
 import RegisterButton from "./RegisterButton.jsx";
-import UpdateButton from "./UpdateButton.jsx";
 import { useState } from "react";
 
 const ImputForm = (props) => {
-    const { pageSwitch, records, setRecord, setShow, setAlert, autoId, setId, searchId, setSearchId } = props;
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [state, setState] = useState("");
+    const { records, setRecord, info, setInfo, setAlert, setSearch } = props;
+    const [missing, setMissing] = useState({ description: false, price: false, state: false });
 
+    return (
+        <Container className="mt-3">
 
+            <Row className="d-flex justify-content-center mb-3">
+                <Product info={info} setInfo={setInfo} missingInput={missing.description} />
+                <Price info={info} setInfo={setInfo} missingInput={missing.price} />
+            </Row>
 
-    if (pageSwitch === "Register") {
-        return (
-            <Row className="d-flex justify-content-center">
-                <AutoId setSearchId={setSearchId} />
-                <Product setDescription={setDescription} />
-                <Price setPrice={setPrice} />
-                <State setState={setState} />
-                {/* <Filter /> */}
+            <Row className="d-flex justify-content-center mb-1">
+                <State info={info} setInfo={setInfo} missingInput={missing.state} />
+                <AutoId setSearch={setSearch} />
+            </Row>
+
+            <Row className="d-flex justify-content-center mb-4">
                 <RegisterButton records={records}
                     setRecord={setRecord}
-                    description={description}
-                    price={price}
-                    state={state}
-                    setShow={setShow}
+                    info={info}
+                    setInfo={setInfo}
                     setAlert={setAlert}
-                    autoId={autoId}
-                    setId={setId} />
-            </Row>)
-    } else {
-        return (<Row className="d-flex justify-content-center">
-            <Product />
-            <Price />
-            <State />
-            {/* <Filter /> */}
-            <UpdateButton />
-        </Row>)
-    }
-
-
+                    missing={missing}
+                    setMissing={setMissing} />
+            </Row>
+        </Container>
+    )
 }
 
 export default ImputForm;

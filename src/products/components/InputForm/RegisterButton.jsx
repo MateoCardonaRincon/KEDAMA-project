@@ -1,24 +1,42 @@
-import { Button, Col } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 
 const RegisterButton = (props) => {
-    const { records, setRecord, description, price, state, setShow, setAlert, autoId, setId } = props;
+    const { records, setRecord, info, setInfo, setAlert, missing, setMissing } = props;
 
     const handleClic = (event) => {
-        if (description !== "" && price !== "" && state !== "") {
-            setRecord([...records, { id: autoId, description: description, price: parseInt(price), state: state }]);
-            setShow(true)
-            setAlert("success")
-            setId(autoId + 1)
+        if (info.description !== "" && info.price !== "" && info.state !== "") {
+            setRecord([...records,
+            { id: info.id, description: info.description, price: parseInt(info.price), state: info.state }]);
+            setAlert({ show: true, type: "success" })
+            info.id = info.id + 1
+            setInfo(info)
+            setMissing({ description: false, price: false, state: false })
+
         } else {
-            setShow(true)
-            setAlert("danger")
+            if (info.description !== "") {
+                missing.description = false
+            } else { missing.description = true }
+            if (info.price !== "") {
+                missing.price = false
+            } else { missing.price = true }
+            if (info.state !== "") {
+                missing.state = false
+            } else { missing.state = true }
+            setAlert({ show: true, type: "danger" })
+            setMissing(missing)
         }
     }
 
     return (
-        <Col xs={1}>
-            <Button className="form-input-buttons" onClick={handleClic} variant="primary">Registrar</Button>
-        </Col>
+        <Col xs="auto">
+            < Row >
+                <label className="hidden">Buscar</label>
+            </Row >
+            <Row>
+                <Button className="form-input-buttons ml-2" onClick={handleClic} variant="primary">Registrar</Button>
+            </Row>
+
+        </Col >
 
     )
 }
