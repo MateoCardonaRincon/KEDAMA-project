@@ -10,6 +10,7 @@ const HeaderButtons = (props) => {
 
     const login = async (response) => {
         localStorage.setItem('token', response.tokenId)
+        console.log("oauth res:", response)
         await api.users.getUser().then(res => {
             if (res.state) {
                 setLogin(true)

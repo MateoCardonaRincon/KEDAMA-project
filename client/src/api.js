@@ -1,11 +1,12 @@
-console.log("env:", process.env.ROOT_URL);
 const callApi = async (url, reqOptions = {}) => {
   reqOptions.headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
     authorization: "Bearer " + localStorage.getItem("token"),
   };
-  const response = await fetch(process.env.ROOT_URL + url, reqOptions);
+  // "https://kedama-project.herokuapp.com/api"
+  // "http://localhost:3001/api"
+  const response = await fetch("http://localhost:3001/api" + url, reqOptions);
   const data = await response.json();
   return data;
 };
