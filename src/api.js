@@ -4,7 +4,11 @@ const callApi = async (url, reqOptions = {}) => {
     "Content-Type": "application/json",
     authorization: "Bearer " + localStorage.getItem("token"),
   };
-  const response = await fetch("http://localhost:3001/api" + url, reqOptions);
+  //http://localhost:3001/api
+  const response = await fetch(
+    "https://kedama-project-backend.herokuapp.com/api" + url,
+    reqOptions
+  );
   const data = await response.json();
   return data;
 };
