@@ -1,37 +1,44 @@
-import { Container, Row } from "react-bootstrap";
-import AutoId from "./AutoId.jsx"
+import { Container, Row, Col, Form } from "react-bootstrap";
+import Filter from "./FilterInput.jsx"
 import Product from "./ProductInput.jsx";
 import Price from "./PriceInput.jsx";
 import State from "./StateInput.jsx";
 import RegisterButton from "./RegisterButton.jsx";
-import { useState } from "react";
+import '../../../styles/inpForm.css';
 
 const ImputForm = (props) => {
-    const { records, setRecord, info, setInfo, setAlert, setSearch } = props;
-    const [missing, setMissing] = useState({ description: false, price: false, state: false });
+    const { info, setInfo, missing } = props;
 
     return (
-        <Container className="mt-3">
-
-            <Row className="d-flex justify-content-center mb-3">
+        <Container className="mt-2">
+            <Row className="d-flex justify-content-center form-input-box mb-3">
                 <Product info={info} setInfo={setInfo} missingInput={missing.description} />
+            </Row>
+
+            <Row className="d-flex justify-content-center form-input-box mb-3">
                 <Price info={info} setInfo={setInfo} missingInput={missing.price} />
             </Row>
 
-            <Row className="d-flex justify-content-center mb-1">
+            <Row className="d-flex justify-content-center form-select-custome mb-5">
                 <State info={info} setInfo={setInfo} missingInput={missing.state} />
-                <AutoId setSearch={setSearch} />
             </Row>
 
-            <Row className="d-flex justify-content-center mb-4">
-                <RegisterButton records={records}
-                    setRecord={setRecord}
-                    info={info}
-                    setInfo={setInfo}
-                    setAlert={setAlert}
-                    missing={missing}
-                    setMissing={setMissing} />
+            <>
+                <Col>
+                    <Form.Label>Filtrar</Form.Label>
+                </Col>
+            </>
+
+            <Row className="d-flex justify-content-between form-input-box mb-5">
+                <Filter properties={props} />
             </Row>
+
+            <Row className="d-flex justify-content-center form-buttons mb-5">
+                <RegisterButton
+                    properties={props}
+                />
+            </Row>
+
         </Container>
     )
 }
