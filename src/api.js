@@ -6,7 +6,10 @@ const callApi = async (url, reqOptions = {}) => {
   };
   // "https://kedama-project.herokuapp.com/api"
   // "http://localhost:3001/api"
-  const response = await fetch("http://localhost:3001/api" + url, reqOptions);
+  const response = await fetch(
+    "https://kedama-project.herokuapp.com/api" + url,
+    reqOptions
+  );
   const data = await response.json();
   return data;
 };
