@@ -20,7 +20,11 @@ app.use(cors());
 const connectionString = process.env.MONGODB_CONNECTION;
 mongoose.connect(connectionString).then(() => {
   console.log("Connected to MongoDB!");
-}); 
+});
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 // define api routes
 app.use("/api/sales", salesRoutes);
