@@ -1,12 +1,13 @@
-require("dotenv").config();
-
 const callApi = async (url, reqOptions = {}) => {
   reqOptions.headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
     authorization: "Bearer " + localStorage.getItem("token"),
   };
-  const response = await fetch(process.env.BACKEND_URL + url, reqOptions);
+  const response = await fetch(
+    process.env.REACT_APP_BACKEND_URL + url,
+    reqOptions
+  );
   const data = await response.json();
   return data;
 };
