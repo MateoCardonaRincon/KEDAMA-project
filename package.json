@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^5.0.0-alpha3",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.9",
     "prop-types": "^15.7.2",

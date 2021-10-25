@@ -1,14 +1,12 @@
+require("dotenv").config();
+
 const callApi = async (url, reqOptions = {}) => {
   reqOptions.headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
     authorization: "Bearer " + localStorage.getItem("token"),
   };
-  //http://localhost:3001/api
-  const response = await fetch(
-    "https://kedama-project-backend.herokuapp.com/api" + url,
-    reqOptions
-  );
+  const response = await fetch(process.env.BACKEND_URL + url, reqOptions);
   const data = await response.json();
   return data;
 };
